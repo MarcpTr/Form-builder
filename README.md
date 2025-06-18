@@ -5,4 +5,5 @@ Este proyecto es una aplicación web construida con **React** que permite a los 
 
 
 ```bash
+npm install
 npm run build
