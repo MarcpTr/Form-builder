@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 
 
 const FormBuilder = () => {
+  
   const [inputs, setInputs] = useState([]);
+  const [questions, setQuestions] = useState(0);
+  const [checkboxes, setCheckboxes] = useState(0);
   useEffect(()=>{
     console.log(inputs);
   },[inputs]);
@@ -13,8 +16,10 @@ const FormBuilder = () => {
       {
         type: 'simple',
         value: '',
+        question: questions
       }
     ]);
+    setQuestions(questions + 1)
   };
 
   const addParentInput = () => {
@@ -23,9 +28,11 @@ const FormBuilder = () => {
       {
         type: 'parent',
         value: '',
+        checkbox: checkboxes,
         children: []
       }
     ]);
+    setCheckboxes(checkboxes + 1 )
   };
 
   const addChildInput = (parentId) => {
@@ -59,13 +66,15 @@ const FormBuilder = () => {
   };
 
   return (
-    <form method="POST" action="/form/create">
-      {inputs.map((input, index) => {
+    <form method="POST" action="http://localhost:8080/form/create">
+      {
+      
+      inputs.map((input, index) => {
         if (input.type === 'simple') {
           return (
             <div key={input.id} style={{ marginBottom: '1em' }}>
               <input
-                name={`questions[${index}]`}
+                name={`questions[${input.question}]`}
                 value={input.value}
                 onChange={(e) => handleChange(index, e.target.value)}
               />
@@ -75,7 +84,7 @@ const FormBuilder = () => {
           return (
             <div  style={{ marginBottom: '1em', padding: '0.5em', border: '1px solid #ccc' }}>
               <input
-                name={`checkboxes[${index}].label`}
+                name={`checkboxes[${input.checkbox}].question`}
                 value={input.value}
                 onChange={(e) => handleChange(index, e.target.value)}
               />
@@ -85,7 +94,7 @@ const FormBuilder = () => {
                 <div key={child.id} style={{ marginLeft: '1em' }}>
                   <input
                     type={child.inputType}
-                    name={`checkboxes[${index}].option[${childIndex}]`}
+                    name={`checkboxes[${input.checkbox}].option[${childIndex}]`}
                     value={child.value}
                     placeholder="Child input"
                     onChange={(e) =>
