@@ -67,6 +67,8 @@ const FormBuilder = () => {
 
   return (
     <form method="POST" action="http://localhost:8080/form/create">
+      <input name="name" />
+      <input name="description" />
       {
       
       inputs.map((input, index) => {
