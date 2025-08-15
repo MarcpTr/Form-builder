@@ -1,10 +1,14 @@
 
+
 # Form-builder
 # 📝 Generador Dinámico de Formularios (React)
 
 Este proyecto es una aplicación web construida con **React** que permite a los usuarios crear formularios de manera dinámica y enviarlos mediante una petición **POST** 
 ![enter image description here](https://raw.githubusercontent.com/MarcpTr/Form-builder/refs/heads/main/main.jpg)
-Ej: 
+
+Se manda con:
+
+> application/x-www-form-urlencoded
 
     name=Android Mobile Developer
     description=Curso de desarrollo con Android
